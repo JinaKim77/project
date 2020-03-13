@@ -42,7 +42,7 @@ while infix:  #while there is still element in infix
         #Push any characters on the opers stack with higher prec to the output
 
         while opers and  prec[c]<prec[opers[-1]]:
-            postfix.append(opers.push())
+            postfix.append(opers.push())                 
 
         #Push c to the operator stack
         opers.append(c)
@@ -65,4 +65,4 @@ print("Ooutput is:", postfix)
 
 
 
-
+                     
