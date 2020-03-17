@@ -212,8 +212,14 @@ def match(regex,s):
     #Ask the NFA if matches the string s.
     return nfa.accept in current
 
-        
-print(match("a.b|b*","bbbbbbb"))
+#Take value from the user
+regex = input("Enter your value: ")  
+
+#Take expected value from the user.
+stringToMatch = input("Enter the string to be checked:  ");
+
+#To print the result True or False
+print(match(regex,stringToMatch))
 
 
 
