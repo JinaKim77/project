@@ -40,7 +40,7 @@ def shunt(infix):
     postfix=[] #Create empty stack for postfix
 
     #Operator precedence
-    prec={'*':100, '.':80, '|':60, ')':40, '(':20} # create dictionary
+    precedence={'(':1,')':2,'+':3, '-':3,'|':4,'.':5,'*':6,'%':6,'/':6,'^':7} # create dictionary
 
     #Loop through the input one character at a time
     while infix:  #while there is still element in infix
@@ -60,10 +60,10 @@ def shunt(infix):
             #Get rid of the '('
             opers.pop()
 
-        elif c in prec:
+        elif c in precedence:
             #Push any characters on the opers stack with higher prec to the output
 
-            while opers and prec[c]<prec[opers[-1]]:
+            while opers and precedence[c]<precedence[opers[-1]]:
                 postfix.append(opers.pop())
 
             #Push c to the operator stack
@@ -243,5 +243,12 @@ if __name__ == "__main__":
               (" should match " if test[2] else " should not match ") + test[1]
 
 
+
+#To test shunt function
+
+#Take infix regular expression from the user
+regexes=input("Enter infix regular expression here : ")
+
+print("The postfix regular expression is ",shunt(regexes))
 
 
