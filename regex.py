@@ -244,11 +244,29 @@ if __name__ == "__main__":
 
 
 
-#To test shunt function
+#Give option to the user
+var = input("Press 1, to convert your infix to postfix,  press 2, to test your infix and postfix  :  , press 0 to exit : ")
+num = int(var)
 
-#Take infix regular expression from the user
-regexes=input("Enter infix regular expression here : ")
+while(num != 0):
 
-print("The postfix regular expression is ",shunt(regexes))
+    if num==1:
+        print("Read infix expression!")
+        #Take infix regular expression from the user input
+        regexes=input("Enter infix regular expression here:  ")
+        print("Given infix expression is  ", regexes,",  and post expression is:  ",shunt(regexes))
+
+    if num==2:
+        #Take infix regular expression from the user
+        regexes=input("Enter your value : ")
+
+        #Take the string that the user wants to match
+        stringToMatch=input("Enter the string that you want to match : ")
+
+        #To print the result as True or False
+        print("The result is", match(regexes,stringToMatch))
+
+    var = input("If you want to continue, press 1 or 2, if not, press 0 to exit  : ")
+    num = int(var)
 
 
