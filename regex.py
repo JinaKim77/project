@@ -2,38 +2,40 @@
 # Classes used in Thompson's construction
 
 class State:
+    """A state with one or two edges, all edges labeled by label."""
+
     #Every state has 0,1, or 2 edges from it.
     edges =[]
 
     # Label for the arrows. None means epsilon.
     label=None
 
-    # Constructor for the class
+    # Constructor of State class
     def __init__(self, label=None, edges=[]):
         self.edges=edges
         self.label=label
 
 class Fragment:
-    # Start status of NFA fragment
-    start=None
+    """An NFA fragment with a start state and an accept state."""
 
-    # Accept state of NFA fragment
-    accept=None
-
-    #Constructor
+    #Constructor of Fragment class
     def __init__(self,start,accept):
+        # Start state of NFA fragment
         self.start=start
+        # Accept state of NFA fragment
         self.accept=accept
 
 
 def shunt(infix):
+    """Return the infix regular expression in postfix"""
+
     #Convert input to a stack-ish list
-    infix = list(infix)[::-1]
-    # put "infix" into the list, [::-1] means it reverses the list
+    infix = list(infix)[::-1]  # put "infix" into the list, [::-1] means it reverses the list
 
     #Operator stack
     opers=[] #Create empty stack named "opers"
 
+    #Postfix regular expression
     #Output list
     postfix=[] #Create empty stack for postfix
 
@@ -84,11 +86,15 @@ def shunt(infix):
 
 
 def compile(infix):
+    """Return an NFA fragment representing the infix regular expression."""
 
+    # Convert infix to postfix.
     postfix=shunt(infix)
+    # Make postfix a stack of characters.
     postfix=list(postfix)[::-1]
 
     # Keep track all of the fragment that you've created from the postfix
+    # A stack for NFA fragment
     nfa_stack=[] 
 
     while postfix:
@@ -103,8 +109,10 @@ def compile(infix):
             # Point frag2's accept state at frag1's start state
             frag2.accept.edges.append(frag1.start)
 
-            # Create new instance of fragment to represent the new NFA
-            newfrag=Fragment(frag2.start, frag1.accept)
+            # The new start state is frag2's
+            start=frag2.start
+            # The new accept state is frag1's
+            accept=frag1.accept
             
             #Push the new NFA to the NFA stack
             nfa_stack.append(newfrag)
@@ -122,9 +130,6 @@ def compile(infix):
             # Point the old accept states at the new one
             frag2.accept.edges.append(accept)
             frag1.accept.edges.append(accept)
-
-            # Create new instance of fragment to represent the new NFA
-            newfrag=Fragment(start,accept)
                 
             # Push the new NFA Stack
             nfa_stack.append(newfrag)
@@ -141,9 +146,6 @@ def compile(infix):
             frag.accept.edges.append(frag.start)
             frag.accept.edges.append(accept)
 
-            # Create new instance of fragment to represent the new NFA
-            newfrag=Fragment(start,accept)
-
             # Push the new NFA stack
             nfa_stack.append(newfrag)
 
@@ -151,18 +153,22 @@ def compile(infix):
         else:
             accept=State()
             start=State(label=c, edges=[accept])
-
+                
             # Create new instance of fragment to represent the new NFA
             newfrag=Fragment(start,accept)
-                
+
             # Push the new NFA Stack
             nfa_stack.append(newfrag)
+
+    # Create new instance of fragment to represent the new NFA
+    newfrag=Fragment(start,accept)
 
     # The NFA stack should have exactly one NFA on it.
     return nfa_stack.pop()
 
 #Add a state to a set, and follow all of the e(psilon) arrows
 def followes(state, current):
+    """Make current state to follow"""
     # Only do something when we haven't already seen the state
     if state not in current:
         # Put the state itself into current
@@ -175,6 +181,8 @@ def followes(state, current):
                 followes(x,current)
 
 def match(regex,s):
+    """Return true of false value depending on the match result"""
+
     #This function will return true if and only if the regular expression regex(fully)
     #mactches the string s. It returns false otherwise.
 
@@ -212,17 +220,27 @@ def match(regex,s):
     #Ask the NFA if matches the string s.
     return nfa.accept in current
 
-#Take value from the user
-regex = input("Enter your value: ")  
 
-#Take expected value from the user.
-stringToMatch = input("Enter the string to be checked:  ");
+print("This is from",__name__)
 
-#To print the result True or False
-print(match(regex,stringToMatch))
+# This will diaply in main ONLY(regex.py)
+if __name__ == "__main__":
 
+    #assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
+    #assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbbx"
 
+    #Do multiple tests
+    tests=[
+      ["a.b|b*","bbbbbb",True],
+      ["a.b|b*","bbbbbx",False],
+      #["a.b","ab",True],
+      #["b**","b",True],
+      #["b*","",True]
+    ]
 
+    for test in tests:
+      assert match(test[0], test[1]) == test[2], test[0] + \
+              (" should match " if test[2] else " should not match ") + test[1]
 
 
 
