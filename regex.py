@@ -10,7 +10,7 @@ class State:
     # Label for the arrows. None means epsilon.
     label=None
 
-    # Constructor of State class
+    # Constructor to initialize the class variables 
     def __init__(self, label=None, edges=[]):
         self.edges=edges
         self.label=label
@@ -18,7 +18,7 @@ class State:
 class Fragment:
     """An NFA fragment with a start state and an accept state."""
 
-    #Constructor of Fragment class
+    # Constructor to initialize the class variables   
     def __init__(self,start,accept):
         # Start state of NFA fragment
         self.start=start
@@ -29,62 +29,66 @@ class Fragment:
 def shunt(infix):
     """Return the infix regular expression in postfix"""
 
-    #Convert input to a stack-ish list
+    # Convert input to a stack-ish list
     infix = list(infix)[::-1]  # put "infix" into the list, [::-1] means it reverses the list
 
-    #Operator stack
+    # This array is used a stack
     opers=[] #Create empty stack named "opers"
 
-    #Postfix regular expression
-    #Output list
-    postfix=[] #Create empty stack for postfix
+    # Postfix regular expression
+    # Output list
+    postfix=[] # Create empty stack for postfix
 
-    #Operator precedence
+    # Operator precedence
+    # Precedence setting 
     precedence={'(':1,')':2,'+':3, '-':3,'|':4,'.':5,'*':6,'%':6,'/':6,'^':7} # create dictionary
 
-    #Loop through the input one character at a time
-    while infix:  #while there is still element in infix
-    #Pop a character from the input 
+    # Loop through the input one character at a time
+    while infix:  # while there is still element in infix
+    # Pop a character from the input 
         c=infix.pop()
 
-        #Decide what to do based on the character
+        # Decide what to do based on the character
+        # If the character is an '(', push it to stack
         if c=='(':
-            #Push an open bracket to the opers stack
+            # Push an open bracket to the opers stack
             opers.append(c)
 
+        # If the scanned character is an ')', pop and  
+        # output from the stack until and '(' is found 
         elif c==')':
-            #Pop the operator stack until you find an (
+            # Pop the operator stack until you find an (
             while opers[-1]!='(':
                 postfix.append(opers.pop())
 
-            #Get rid of the '('
+            # Get rid of the '('
             opers.pop()
 
         elif c in precedence:
-            #Push any characters on the opers stack with higher prec to the output
+            # Push any characters on the opers stack with higher prec to the output
 
             while opers and precedence[c]<precedence[opers[-1]]:
                 postfix.append(opers.pop())
 
-            #Push c to the operator stack
+            # Push c to the operator stack
             opers.append(c)
 
         else:
-            #Typically, we just push the character to the output
+            # Typically, we just push the character to the output
             postfix.append(c)
 
-            #Pop all operators to the output
+            # Pop all operators to the output
     while opers:
         postfix.append(opers.pop())
 
-    #Convert output list to String
+    # Convert output list to String
     return ''.join(postfix)
 
-    #Print the result
-    #print("Ooutput is:", postfix)
+    # Print the result
+    # print("Output is:", postfix)
 
 
-
+# The main function that converts given infix expression to postfix expression 
 def compile(infix):
     """Return an NFA fragment representing the infix regular expression."""
 
@@ -226,8 +230,8 @@ print("This is from",__name__)
 # This will diaply in main ONLY(regex.py)
 if __name__ == "__main__":
 
-    #assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
-    #assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbbx"
+    assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
+    assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbbx"
 
     #Do multiple tests
     tests=[
