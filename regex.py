@@ -207,6 +207,41 @@ def match(regex,s):
     return nfa.accept in current
 
 
+def isOperand(x):
+    return ((x >= 'a' and x <= 'z') or
+            (x >= 'A' and x <= 'Z'))
+
+# Get Infix for a given postfix
+# expression
+def getInfix(exp) :
+
+    s = []
+
+    for i in exp:
+
+        # Push operands
+        if (isOperand(i)) :
+            s.insert(0, i)
+
+        # We assume that input is a
+        # valid postfix and expect
+        # an operator.
+        else:
+
+            op1 = s[0]
+            s.pop(0)
+            op2 = s[0]
+            s.pop(0)
+            s.insert(0, "(" + op2 + i +
+                             op1 + ")")
+
+    # There must be a single element in
+    # stack now which is the required
+    # infix.
+    return s[0]
+
+
+
 print("This is from",__name__)
 
 # This will diaply in main ONLY(regex.py)
@@ -229,7 +264,7 @@ if __name__ == "__main__":
 
 
 #Give option to the user
-var = input("Press 1, to convert your infix to postfix,  press 2, to test your infix and postfix  :  , press 0 to exit : ")
+var = input("Press 1, to convert your infix to postfix,  press 2, to test your infix and postfix  :  ,press 3, to get infix from postfix, epress 0 to exit : ")
 num = int(var)
 
 while(num != 0):
@@ -242,7 +277,7 @@ while(num != 0):
 
     if num==2:
         #Take infix regular expression from the user
-        regexes=input("Enter your value : ")
+        regexes=input("Enter your infix regular expression : ")
 
         #Take the string that the user wants to match
         stringToMatch=input("Enter the string that you want to match : ")
@@ -250,5 +285,10 @@ while(num != 0):
         #To print the result as True or False
         print("The result is", match(regexes,stringToMatch))
 
-    var = input("If you want to continue, press 1 or 2, if not, press 0 to exit  : ")
+    if num==3:
+        #Take postfix regular expression from the user input
+        postfixReg=input("Enter your postfix regular expression:")
+        print(getInfix(postfixReg.strip())) 
+
+    var = input("If you want to continue, press 1 or 2 or 3, if not, press 0 to exit  : ")
     num = int(var)
