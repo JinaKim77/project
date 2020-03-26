@@ -4,16 +4,12 @@
 class State:
     """A state with one or two edges, all edges labeled by label."""
 
-    #Every state has 0,1, or 2 edges from it.
-    edges =[]
-
-    # Label for the arrows. None means epsilon.
-    label=None
-
     # Constructor to initialize the class variables 
-    def __init__(self, label=None, edges=[]):
-        self.edges=edges
-        self.label=label
+    def __init__(self, label=None, edges=None):
+        # Every state has 0, 1, or 2 edges from it.
+        self.edges = edges if edges else []
+        # Label for the arrows. None means epsilon.
+        self.label = label
 
 class Fragment:
     """An NFA fragment with a start state and an accept state."""
@@ -117,9 +113,6 @@ def compile(infix):
             start=frag2.start
             # The new accept state is frag1's
             accept=frag1.accept
-            
-            #Push the new NFA to the NFA stack
-            nfa_stack.append(newfrag)
 
 
         elif c=='|':
@@ -135,37 +128,26 @@ def compile(infix):
             frag2.accept.edges.append(accept)
             frag1.accept.edges.append(accept)
                 
-            # Push the new NFA Stack
-            nfa_stack.append(newfrag)
-
 
         elif c=='*':
             # Pop a single fragment off the stack
-            frag=nfa_stack.pop()
+            frag = nfa_stack.pop()
             # Create new start and accept states
-            accept =State()
-            start =State(edges=[frag.start, accept])
+            accept = State()
+            start = State(edges=[frag.start, accept])
 
             # Point the arrows
-            frag.accept.edges.append(frag.start)
-            frag.accept.edges.append(accept)
-
-            # Push the new NFA stack
-            nfa_stack.append(newfrag)
+            frag.accept.edges = [frag.start, accept]
 
 
         else:
-            accept=State()
-            start=State(label=c, edges=[accept])
-                
-            # Create new instance of fragment to represent the new NFA
-            newfrag=Fragment(start,accept)
+            accept = State()
+            start = State(label=c, edges=[accept])
 
-            # Push the new NFA Stack
-            nfa_stack.append(newfrag)
-
-    # Create new instance of fragment to represent the new NFA
-    newfrag=Fragment(start,accept)
+        # Create new instance of fragment to represent the new NFA
+        newfrag=Fragment(start,accept)
+        # Push the new NFA to the NFA stack
+        nfa_stack.append(newfrag)
 
     # The NFA stack should have exactly one NFA on it.
     return nfa_stack.pop()
@@ -185,7 +167,7 @@ def followes(state, current):
                 followes(x,current)
 
 def match(regex,s):
-    """Return true of false value depending on the match result"""
+    """Return true or false value depending on the match result"""
 
     #This function will return true if and only if the regular expression regex(fully)
     #mactches the string s. It returns false otherwise.
@@ -231,21 +213,19 @@ print("This is from",__name__)
 if __name__ == "__main__":
 
     assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
-    assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbbx"
-
+    assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbx"
+    
     #Do multiple tests
     tests=[
-      ["a.b|b*","bbbbbb",True],
-      ["a.b|b*","bbbbbx",False],
-      #["a.b","ab",True],
-      #["b**","b",True],
-      #["b*","",True]
+        ["a.b|b*","bbbbbb",True],
+        ["a.b|b*","bbbbbx",False],
+        #["a.b","ab.",True],
+        #["b**","b",True],
+        #["b*","",True]
     ]
 
     for test in tests:
-      assert match(test[0], test[1]) == test[2], test[0] + \
-              (" should match " if test[2] else " should not match ") + test[1]
-
+        assert match(test[0], test[1]) == test[2], test[0] + (" should " if test[2] else " should not ") +" match "+ test[1]
 
 
 #Give option to the user
@@ -257,8 +237,8 @@ while(num != 0):
     if num==1:
         print("Read infix expression!")
         #Take infix regular expression from the user input
-        regexes=input("Enter infix regular expression here:  ")
-        print("Given infix expression is  ", regexes,",  and post expression is:  ",shunt(regexes))
+        infixReg=input("Enter infix regular expression here:  ")
+        print("Given infix expression is  ", infixReg,",  and post expression is:  ",shunt(infixReg))
 
     if num==2:
         #Take infix regular expression from the user
@@ -272,5 +252,3 @@ while(num != 0):
 
     var = input("If you want to continue, press 1 or 2, if not, press 0 to exit  : ")
     num = int(var)
-
-
