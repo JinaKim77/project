@@ -3,7 +3,9 @@
 
 class State:
     """A state with one or two edges, all edges labeled by label."""
-
+    
+    label = None
+    edges = None
     # Constructor to initialize the class variables 
     def __init__(self, label=None, edges=None):
         # Every state has 0, 1, or 2 edges from it.
@@ -13,7 +15,9 @@ class State:
 
 class Fragment:
     """An NFA fragment with a start state and an accept state."""
-
+    
+    start = None
+    accept = None
     # Constructor to initialize the class variables   
     def __init__(self,start,accept):
         # Start state of NFA fragment
@@ -73,15 +77,12 @@ def shunt(infix):
             # Typically, we just push the character to the output
             postfix.append(c)
 
-            # Pop all operators to the output
+    # Pop all operators to the output
     while opers:
         postfix.append(opers.pop())
 
     # Convert output list to String
     return ''.join(postfix)
-
-    # Print the result
-    # print("Output is:", postfix)
 
 
 # The main function that converts given infix expression to postfix expression 
@@ -139,7 +140,16 @@ def compile(infix):
             # Point the arrows
             frag.accept.edges = [frag.start, accept]
 
+        elif c=='+':
+            # Pop a single fragment off the stack
+            frag = nga_stack.pop()
 
+            # Create new start and accept states
+            accept = State()
+            start = Strate(edges=[frag.start, accept])
+
+            # Point the arrows
+            frag.accept.edges = [frag.start, accept]
         else:
             accept = State()
             start = State(label=c, edges=[accept])
@@ -154,11 +164,12 @@ def compile(infix):
 
 #Add a state to a set, and follow all of the e(psilon) arrows
 def followes(state, current):
-    """Make current state to follow"""
+    """Make current state to follow e arrows"""
     # Only do something when we haven't already seen the state
     if state not in current:
         # Put the state itself into current
         current.add(state)
+
         # See whether state is labelled by e(psilon)
         if state.label is None:
             #Loop through the states pointed to by this state
@@ -166,7 +177,7 @@ def followes(state, current):
                 # Follow all of their e(psilon)s too.
                 followes(x,current)
 
-def match(regex,s):
+def match(regex,s):#infix and string to match
     """Return true or false value depending on the match result"""
 
     #This function will return true if and only if the regular expression regex(fully)
@@ -186,7 +197,7 @@ def match(regex,s):
     # The previous set of states
     previous = set()
 
-    # Loop through characters in s.
+    # Loop through characters in s(string)
     for c in s:
         # Keep track of where we were
         previous = current
@@ -203,7 +214,8 @@ def match(regex,s):
                     # Add the state at the end of the arrow to current
                     followes(state.edges[0], current)
 
-    #Ask the NFA if matches the string s.
+    # Ask the NFA if matches the string s.
+    # Return accept state in current states.
     return nfa.accept in current
 
 
@@ -223,9 +235,7 @@ def getInfix(exp) :
         if (isOperand(i)) :
             s.insert(0, i)
 
-        # We assume that input is a
-        # valid postfix and expect
-        # an operator.
+        # expect operator.
         else:
 
             op1 = s[0]
@@ -245,6 +255,7 @@ def getInfix(exp) :
 print("This is from",__name__)
 
 # This will diaply in main ONLY(regex.py)
+# Test if all functions work properly
 if __name__ == "__main__":
 
     assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
@@ -264,18 +275,20 @@ if __name__ == "__main__":
 
 
 #Give option to the user
-var = input("Press 1, to convert your infix to postfix,  press 2, to test your infix and postfix  :  ,press 3, to get infix from postfix, epress 0 to exit : ")
+var = input("\nPress 1 - to convert your infix to postfix \nPress 2 - to test your infix and postfix \nPress 3 - to get infix from postfix \nPress 0 - to exit  \n")
 num = int(var)
 
 while(num != 0):
 
+    # Just check what the postfix is from the user input(infix)
     if num==1:
         print("Read infix expression!")
         #Take infix regular expression from the user input
-        infixReg=input("Enter infix regular expression here:  ")
-        print("Given infix expression is  ", infixReg,",  and post expression is:  ",shunt(infixReg))
+        infixReg=input("Enter infix regular expression :  ")
+        print("\nYou entered infix expression :", infixReg, "\nPostfix expression is:  ",shunt(infixReg))
 
-    if num==2:
+    # Compare user inputs(infix and postfix)
+    elif num==2:
         #Take infix regular expression from the user
         regexes=input("Enter your infix regular expression : ")
 
@@ -283,12 +296,18 @@ while(num != 0):
         stringToMatch=input("Enter the string that you want to match : ")
 
         #To print the result as True or False
-        print("The result is", match(regexes,stringToMatch))
+        print("\nResult")
+        print(match(regexes,stringToMatch),"\n")
 
-    if num==3:
+    # Just check what the infix is from the user input(postfix)
+    elif num==3:
         #Take postfix regular expression from the user input
         postfixReg=input("Enter your postfix regular expression:")
-        print(getInfix(postfixReg.strip())) 
+        print("\nResult")
+        print(getInfix(postfixReg.strip()),"\n") 
 
-    var = input("If you want to continue, press 1 or 2 or 3, if not, press 0 to exit  : ")
+    else:
+        print("Not a valid choice, try that again!")
+
+    var = input("\nIf you want to continue, press 1 or 2 or 3, if not, press 0 to exit  : ")
     num = int(var)
