@@ -1,9 +1,9 @@
-# project
+# Graph theory project
 
-Program in Python to execute regular expressions on
-strings using an algorithm known as Thompson’s construction.
+**Program in Python _to execute regular expressions_ on
+strings using an algorithm known as Thompson’s construction.**
 
-   (Convert infix expression to postfix expression using Shunting yard algorithm)
+### Convert infix expression to postfix expression using Shunting yard algorithm
 
 1. Scan the infix expression from left to right.
 2. If the scanned character is an operand, output it.
@@ -27,33 +27,54 @@ The program will ask the user if they want to...
  the user can type both infix expression and postfix expression to test if they are matched.
 
 
-User guide
-When running the program, the user gets a list of menu options. To select a menu option, enter the corresponding number for the user preference.
-![](images/mainmenu.PNG)
- option 1. This allows the user enter infix regular expression and this program will output post regular expression
+
+# User guide
+### When running the program, the user gets a list of menu options. To select a menu option, enter the corresponding number for the user preference.
+<p>
+<img src="Images/mainmenu.PNG" width="600" >
+</p>
+
+ ### option 1. This allows the user enter infix regular expression and this program will output post regular expression
           (This wasn't what the project asked for, but I just added for the user preference)
-![](images/option1.PNG)
- option 2. This allows the user enter infix and postfix regular expression and this program check if they are matched or not.
-![](images/option2.1.PNG)
-![](images/option2.2.PNG)
- option 3. This allows the user enter postfix regular expression and this program will output infix regular expression
+          
+<p>         
+<img src="Images/option1.PNG" width="700" >
+</p>
+
+ ### option 2. This allows the user enter infix and postfix regular expression and this program check if they are matched or not.
+ 
+<p>
+ <img src="Images/option2.1.PNG" width="700" >
+</p>
+
+<p>
+ <img src="Images/option2.2.PNG" width="700" >
+</p>
+
+ ### option 3. This allows the user enter postfix regular expression and this program will output infix regular expression
           (This wasn't what the project asked for, but I just added for the user preference)
-![](images/option3.PNG)        
- option 0. To exit 
-![](images/option0.PNG)   
+          
+<p>
+<img src="Images/option3.PNG" width="700" >       
+</p>
+
+ ### option 0. To exit 
+
+<p>
+<img src="Images/option0.PNG" width="700" > 
+</p>
  
- When the user enter invalid input, this message will display.
- ![](images/invalidInput.PNG)  
- 
- 
- 
- 
+ ### When the user enter invalid input, this message will display.
+
+<p>
+ <img src="Images/invalidInput.PNG" width="700" >
+</p>
  
 
 
-(References)
- 1. https://www.w3schools.com/python/python_regex.asp
- 2. https://realpython.com/    
- 3. https://www.geeksforgeeks.org/infix-to-postfix-using-different-precedence-values-for-in-stack-and-out-stack/?ref=rp
- 4. https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
+# References
+ - https://www.w3schools.com/python/python_regex.asp
+ - https://realpython.com/    
+ - https://www.geeksforgeeks.org/infix-to-postfix-using-different-precedence-values-for-in-stack-and-out-stack/?ref=rp
+ - https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
  
