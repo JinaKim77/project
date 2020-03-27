@@ -27,11 +27,26 @@ The program will ask the user if they want to...
  the user can type both infix expression and postfix expression to test if they are matched.
 
 
-(How I wrote this program)
-- I started this project by watching all the lab videos and some rearches enhanced this project.
-
+User guide
+When running the program, the user gets a list of menu options. To select a menu option, enter the corresponding number for the user preference.
+ option 1. This allows the user enter infix regular expression and this program will output post regular expression
+          (This wasn't what the project asked for, but I just added for the user preference)
+ 
+ option 2. This allows the user enter infix and postfix regular expression and this program check if they are matched or not.
+ 
+ option 3. This allows the user enter postfix regular expression and this program will output infix regular expression
+          (This wasn't what the project asked for, but I just added for the user preference)
+          
+ option 0. To exit 
+ 
+ 
+ 
+ 
 
 
 (References)
-
- 1. https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
+ 1. https://www.w3schools.com/python/python_regex.asp
+ 2. https://realpython.com/    
+ 3. https://www.geeksforgeeks.org/infix-to-postfix-using-different-precedence-values-for-in-stack-and-out-stack/?ref=rp
+ 4. https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
+ 
