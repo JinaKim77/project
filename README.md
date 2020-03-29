@@ -81,4 +81,6 @@ The program will ask the user if they want to...
  - https://realpython.com/    
  - https://www.geeksforgeeks.org/infix-to-postfix-using-different-precedence-values-for-in-stack-and-out-stack/?ref=rp
  - https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
+ - https://www.includehelp.com/c/infix-to-postfix-conversion-using-stack-with-c-program.aspx   //converting infix expression to postfix
+ - https://www.codeproject.com/Articles/405361/Converting-Postfix-Expressions-to-Infix          //converting postfix expression to infix
  

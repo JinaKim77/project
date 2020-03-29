@@ -150,6 +150,7 @@ def compile(infix):
 
             # Point the arrows
             frag.accept.edges = [frag.start, accept]
+
         else:
             accept = State()
             start = State(label=c, edges=[accept])
@@ -284,13 +285,13 @@ while(num != 0):
     if num==1:
         print("Read infix expression!")
         #Take infix regular expression from the user input
-        infixReg=input("Enter infix regular expression :  ")
+        infixReg=input("Enter Infix expression : ")
         print("\nYou entered infix expression :", infixReg, "\nPostfix expression is:  ",shunt(infixReg))
 
     # Compare user inputs(infix and postfix)
     elif num==2:
         #Take infix regular expression from the user
-        regexes=input("Enter your infix regular expression : ")
+        regexes=input("Enter Infix expression :  ")
 
         #Take the string that the user wants to match
         stringToMatch=input("Enter the string that you want to match : ")
@@ -302,7 +303,7 @@ while(num != 0):
     # Just check what the infix is from the user input(postfix)
     elif num==3:
         #Take postfix regular expression from the user input
-        postfixReg=input("Enter your postfix regular expression:")
+        postfixReg=input("Enter Postfix expression :")
         print("\nResult")
         print(getInfix(postfixReg.strip()),"\n") 
 
