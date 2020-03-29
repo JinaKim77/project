@@ -26,6 +26,10 @@ The program will ask the user if they want to...
  or
  the user can type both infix expression and postfix expression to test if they are matched.
 
+# How to get postfix from infix expression
+<p>
+<img src="Images/IMG_20200329_131743.jpg" width="600" >
+</p>
 
 
 # User guide
