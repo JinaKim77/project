@@ -4,13 +4,14 @@
 class State:
     """A state with one or two edges, all edges labeled by label."""
     
-    label = None
+    label = None  
     edges = None
+    
     # Constructor to initialize the class variables 
     def __init__(self, label=None, edges=None):
-        # Every state has 0, 1, or 2 edges from it.
+        # Every state has 0, 1, or 2 edges from it. (max 2)
         self.edges = edges if edges else []
-        # Label for the arrows. None means epsilon.
+        # Label for the arrows. None means 'esilon.
         self.label = label
 
 class Fragment:
@@ -18,6 +19,7 @@ class Fragment:
     
     start = None
     accept = None
+    
     # Constructor to initialize the class variables   
     def __init__(self,start,accept):
         # Start state of NFA fragment
@@ -25,7 +27,7 @@ class Fragment:
         # Accept state of NFA fragment
         self.accept=accept
 
-
+# Using shunting yeard algorithm
 def shunt(infix):
     """Return the infix regular expression in postfix"""
 
@@ -39,8 +41,8 @@ def shunt(infix):
     # Output list
     postfix=[] # Create empty stack for postfix
 
-    # Operator precedence
-    # Precedence setting 
+    # Declare the operands,
+    # Pprecedence setting 
     precedence={'(':1,')':2,'+':3, '-':3,'|':4,'.':5,'*':6,'%':6,'/':6,'^':7} # create dictionary
 
     # Loop through the input one character at a time
@@ -78,7 +80,7 @@ def shunt(infix):
             postfix.append(c)
 
     # Pop all operators to the output
-    while opers:
+    while opers: #stack
         postfix.append(opers.pop())
 
     # Convert output list to String
@@ -150,7 +152,55 @@ def compile(infix):
 
             # Point the arrows
             frag.accept.edges = [frag.start, accept]
+<<<<<<< HEAD
 
+=======
+            
+        elif c=='-':
+            # Pop a single fragment off the stack
+            frag = nga_stack.pop()
+
+            # Create new start and accept states
+            accept = State()
+            start = Strate(edges=[frag.start, accept])
+
+            # Point the arrows
+            frag.accept.edges = [frag.start, accept]
+            
+        elif c=='%':
+            # Pop a single fragment off the stack
+            frag = nga_stack.pop()
+
+            # Create new start and accept states
+            accept = State()
+            start = Strate(edges=[frag.start, accept])
+            
+             # Point the arrows
+            frag.accept.edges = [frag.start, accept]
+            
+        elif c=='/':
+            # Pop a single fragment off the stack
+            frag = nga_stack.pop()
+
+            # Create new start and accept states
+            accept = State()
+            start = Strate(edges=[frag.start, accept])
+            
+             # Point the arrows
+            frag.accept.edges = [frag.start, accept]
+            
+        elif c=='^':
+            # Pop a single fragment off the stack
+            frag = nga_stack.pop()
+
+            # Create new start and accept states
+            accept = State()
+            start = Strate(edges=[frag.start, accept])
+            
+             # Point the arrows
+            frag.accept.edges = [frag.start, accept]
+            
+>>>>>>> b6eba5dc2bc45a040925a68cd42c8a79762ed51c
         else:
             accept = State()
             start = State(label=c, edges=[accept])
@@ -178,7 +228,7 @@ def followes(state, current):
                 # Follow all of their e(psilon)s too.
                 followes(x,current)
 
-def match(regex,s):#infix and string to match
+def match(regex,string):#infix and string to match
     """Return true or false value depending on the match result"""
 
     #This function will return true if and only if the regular expression regex(fully)
@@ -199,7 +249,7 @@ def match(regex,s):#infix and string to match
     previous = set()
 
     # Loop through characters in s(string)
-    for c in s:
+    for c in string:
         # Keep track of where we were
         previous = current
 
