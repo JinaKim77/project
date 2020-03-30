@@ -1,5 +1,5 @@
-# Jina Kim
-# Classes used in Thompson's construction
+# Jina Kim - G00353420
+# Project for Grapy Theory Module in Year 3
 
 class State:
     """A state with one or two edges, all edges labeled by label."""
@@ -104,6 +104,7 @@ def compile(infix):
         # Pop a character from postfix
         c=postfix.pop()
 
+        # Concatenation operator
         if c=='.':
             # Pop two fragment off the stack
             frag1=nfa_stack.pop()
@@ -117,7 +118,7 @@ def compile(infix):
             # The new accept state is frag1's
             accept=frag1.accept
 
-
+        # OR opetator
         elif c=='|':
             #pop two fragment off the stack
             frag1=nfa_stack.pop()
@@ -131,7 +132,8 @@ def compile(infix):
             frag2.accept.edges.append(accept)
             frag1.accept.edges.append(accept)
                 
-
+        
+        # Any number of given operators
         elif c=='*':
             # Pop a single fragment off the stack
             frag = nfa_stack.pop()
@@ -142,65 +144,64 @@ def compile(infix):
             # Point the arrows
             frag.accept.edges = [frag.start, accept]
 
+        # One or more of a charactor
         elif c=='+':
             # Pop a single fragment off the stack
-            frag = nga_stack.pop()
+            frag = nfa_stack.pop()
 
             # Create new start and accept states
             accept = State()
-            start = Strate(edges=[frag.start, accept])
+            start = State(edges=[frag.start, accept])
 
             # Point the arrows
-            frag.accept.edges = [frag.start, accept]
-<<<<<<< HEAD
+            frag.accept.edges = [frag.start]
 
-=======
             
         elif c=='-':
             # Pop a single fragment off the stack
-            frag = nga_stack.pop()
+            frag = nfa_stack.pop()
 
             # Create new start and accept states
             accept = State()
-            start = Strate(edges=[frag.start, accept])
+            start = State(edges=[frag.start, accept])
 
             # Point the arrows
             frag.accept.edges = [frag.start, accept]
             
         elif c=='%':
             # Pop a single fragment off the stack
-            frag = nga_stack.pop()
+            frag = nfa_stack.pop()
 
             # Create new start and accept states
             accept = State()
-            start = Strate(edges=[frag.start, accept])
+            start = State(edges=[frag.start, accept])
             
              # Point the arrows
             frag.accept.edges = [frag.start, accept]
             
         elif c=='/':
             # Pop a single fragment off the stack
-            frag = nga_stack.pop()
+            frag = nfa_stack.pop()
 
             # Create new start and accept states
             accept = State()
-            start = Strate(edges=[frag.start, accept])
+            start = State(edges=[frag.start, accept])
             
              # Point the arrows
             frag.accept.edges = [frag.start, accept]
             
         elif c=='^':
             # Pop a single fragment off the stack
-            frag = nga_stack.pop()
+            frag = nfa_stack.pop()
 
             # Create new start and accept states
             accept = State()
-            start = Strate(edges=[frag.start, accept])
+            start = State(edges=[frag.start, accept])
             
              # Point the arrows
             frag.accept.edges = [frag.start, accept]
             
->>>>>>> b6eba5dc2bc45a040925a68cd42c8a79762ed51c
+
         else:
             accept = State()
             start = State(label=c, edges=[accept])
@@ -212,6 +213,7 @@ def compile(infix):
 
     # The NFA stack should have exactly one NFA on it.
     return nfa_stack.pop()
+
 
 #Add a state to a set, and follow all of the e(psilon) arrows
 def followes(state, current):
@@ -309,31 +311,43 @@ print("This is from",__name__)
 # Test if all functions work properly
 if __name__ == "__main__":
 
-    assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
-    assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbx"
+    #assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
+    #assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbx"
+    #assert match("a.b","ab"),"a.b should match ab"
+    #assert match("b**","b"),"a** should match b"
+    #assert match("b*",""),"b* should match "
+
     
     #Do multiple tests
     tests=[
         ["a.b|b*","bbbbbb",True],
         ["a.b|b*","bbbbbx",False],
-        #["a.b","ab.",True],
-        #["b**","b",True],
-        #["b*","",True]
+        ["a.b","ab",True],
+        ["b**","b",True],
+        ["b*","",True],
+        ["a.b.b.c","abbc",True],
+        ["a.b.b.c","abc",False]
+
     ]
 
     for test in tests:
         assert match(test[0], test[1]) == test[2], test[0] + (" should " if test[2] else " should not ") +" match "+ test[1]
-
-
+    
+    
 #Give option to the user
-var = input("\nPress 1 - to convert your infix to postfix \nPress 2 - to test your infix and postfix \nPress 3 - to get infix from postfix \nPress 0 - to exit  \n")
+print("\n*****************Welcome*****************")
+print("Supported characters : +,-,|,*,%,\,^")
+var = input("Press 1- to convert your infix to postfix \nPress 2- to test your infix and postfix \nPress 3- to get infix from postfix \nPress 0- to exit\n ")
+print("*****************************************")
 num = int(var)
 
+if num == 0:
+   print("\nBye!") 
 while(num != 0):
 
     # Just check what the postfix is from the user input(infix)
     if num==1:
-        print("Read infix expression!")
+        print("\nRead infix expression!")
         #Take infix regular expression from the user input
         infixReg=input("Enter Infix expression : ")
         print("\nYou entered infix expression :", infixReg, "\nPostfix expression is:  ",shunt(infixReg))
@@ -341,24 +355,26 @@ while(num != 0):
     # Compare user inputs(infix and postfix)
     elif num==2:
         #Take infix regular expression from the user
-        regexes=input("Enter Infix expression :  ")
+        regexes=input("\nEnter Infix expression :  ")
 
         #Take the string that the user wants to match
         stringToMatch=input("Enter the string that you want to match : ")
 
         #To print the result as True or False
-        print("\nResult")
+        print("\n****Result****\n")
         print(match(regexes,stringToMatch),"\n")
 
     # Just check what the infix is from the user input(postfix)
     elif num==3:
         #Take postfix regular expression from the user input
-        postfixReg=input("Enter Postfix expression :")
+        postfixReg=input("\nEnter Postfix expression :")
         print("\nResult")
         print(getInfix(postfixReg.strip()),"\n") 
 
     else:
-        print("Not a valid choice, try that again!")
+        print("\nNot a valid choice, try that again!")
 
-    var = input("\nIf you want to continue, press 1 or 2 or 3, if not, press 0 to exit  : ")
+    var = input("\nIf you want to continue, press 1 or 2 or 3, if not, press 0 to exit  :\n ")
     num = int(var)
+    if num==0:
+        print("Bye!")
