@@ -311,13 +311,6 @@ print("This is from",__name__)
 # Test if all functions work properly
 if __name__ == "__main__":
 
-    #assert match("a.b|b*","bbbbbb"),"a.b|b* should match bbbbbb"
-    #assert not match("a.b|b*","bbbbbx"),"a.b|b* should not match bbbbx"
-    #assert match("a.b","ab"),"a.b should match ab"
-    #assert match("b**","b"),"a** should match b"
-    #assert match("b*",""),"b* should match "
-
-    
     #Do multiple tests
     tests=[
         ["a.b|b*","bbbbbb",True],
@@ -337,7 +330,7 @@ if __name__ == "__main__":
 #Give option to the user
 print("\n*****************Welcome*****************")
 print("Supported characters : +,-,|,*,%,\,^")
-var = input("Press 1- to convert your infix to postfix \nPress 2- to test your infix and postfix \nPress 3- to get infix from postfix \nPress 0- to exit\n ")
+var = input("Press 1- to convert infix to postfix \nPress 2- to test your infix and postfix \nPress 3- to convert postfix to infix \nPress 4- to see examples\nPress 0- to exit\n ")
 print("*****************************************")
 num = int(var)
 
@@ -350,7 +343,8 @@ while(num != 0):
         print("\nRead infix expression!")
         #Take infix regular expression from the user input
         infixReg=input("Enter Infix expression : ")
-        print("\nYou entered infix expression :", infixReg, "\nPostfix expression is:  ",shunt(infixReg))
+        print("\n****Result****")
+        print("\nPostfix expression is:  ",shunt(infixReg))
 
     # Compare user inputs(infix and postfix)
     elif num==2:
@@ -368,8 +362,20 @@ while(num != 0):
     elif num==3:
         #Take postfix regular expression from the user input
         postfixReg=input("\nEnter Postfix expression :")
-        print("\nResult")
-        print(getInfix(postfixReg.strip()),"\n") 
+        print("\n****Result****")
+        print("\nInfix expression is:  ",getInfix(postfixReg.strip())) 
+
+    elif num==4:
+        #Display examples
+        print("\n****Result****")
+        print("\n==Infix==                 ==Postfix==                      == Result==")
+        print(" a.b|b*                     bbbbbb                           ",match("a.b|b*","bbbbbb"))
+        print(" a.b|b*                     bbbbbx                           ",match("a.b|b*","bbbbbx"))
+        print("  a.b                         ab                             ",match("a.b","ab"))
+        print("  b**                         b                              ",match("b**","b"))
+        print("  b*                                                         ",match("b*",""))
+        print("a.b.b.c                      abbc                            ",match("a.b.b.c","abbc"))
+        print("a.b.b.c                      abc                             ",match("a.b.b.c","abc"))
 
     else:
         print("\nNot a valid choice, try that again!")
