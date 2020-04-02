@@ -43,7 +43,7 @@ def shunt(infix):
 
     # Declare the operands,
     # Pprecedence setting 
-    precedence={'(':1,')':2,'+':3, '-':3,'|':4,'.':5,'*':6,'%':6,'/':6,'^':7} # create dictionary
+    precedence={'(':1,')':2,'+':3,'|':4,'.':5,'*':6,'%':6,'/':6,'^':7} # create dictionary
 
     # Loop through the input one character at a time
     while infix:  # while there is still element in infix
@@ -133,7 +133,7 @@ def compile(infix):
             frag1.accept.edges.append(accept)
                 
         
-        # Any number of given operators
+        # Zero or more of a charactor
         elif c=='*':
             # Pop a single fragment off the stack
             frag = nfa_stack.pop()
@@ -156,8 +156,8 @@ def compile(infix):
             # Point the arrows
             frag.accept.edges = [frag.start]
 
-            
-        elif c=='-':
+        # zero or one of a charactori
+        elif c=='?':
             # Pop a single fragment off the stack
             frag = nfa_stack.pop()
 
@@ -187,7 +187,7 @@ def compile(infix):
             accept = State()
             start = State(edges=[frag.start, accept])
             
-             # Point the arrows
+            # Point the arrows
             frag.accept.edges = [frag.start, accept]
             
         elif c=='^':
@@ -198,7 +198,7 @@ def compile(infix):
             accept = State()
             start = State(edges=[frag.start, accept])
             
-             # Point the arrows
+            # Point the arrows
             frag.accept.edges = [frag.start, accept]
             
 
@@ -329,7 +329,6 @@ if __name__ == "__main__":
     
 #Give option to the user
 print("\n*****************Welcome*****************")
-print("Supported characters : +,-,|,*,%,\,^")
 var = input("Press 1- to convert infix to postfix \nPress 2- to test your infix and postfix \nPress 3- to convert postfix to infix \nPress 4- to see examples\nPress 0- to exit\n ")
 print("*****************************************")
 num = int(var)
@@ -341,6 +340,7 @@ while(num != 0):
     # Just check what the postfix is from the user input(infix)
     if num==1:
         print("\nRead infix expression!")
+        print("Supported characters : . , | , * , + , ? , \ , ^ , % ")
         #Take infix regular expression from the user input
         infixReg=input("Enter Infix expression : ")
         print("\n****Result****")
@@ -348,6 +348,7 @@ while(num != 0):
 
     # Compare user inputs(infix and postfix)
     elif num==2:
+        print("Support characters : . , | , * ")
         #Take infix regular expression from the user
         regexes=input("\nEnter Infix expression :  ")
 
@@ -376,11 +377,14 @@ while(num != 0):
         print("  b*                                                         ",match("b*",""))
         print("a.b.b.c                      abbc                            ",match("a.b.b.c","abbc"))
         print("a.b.b.c                      abc                             ",match("a.b.b.c","abc"))
+        print("(a|b).c*                     accccc                          ",match("(a|b).c*","accccc"))
+        print("(a|b)*                       abababa                         ",match("(a|b)*","abababa"))
+
 
     else:
         print("\nNot a valid choice, try that again!")
 
-    var = input("\nIf you want to continue, press 1 or 2 or 3, if not, press 0 to exit  :\n ")
+    var = input("\nIf you want to continue, press 1 or 2 or 3 or 4, if not, press 0 to exit  :\n ")
     num = int(var)
     if num==0:
         print("Bye!")

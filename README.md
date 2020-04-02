@@ -83,4 +83,5 @@ The program will ask the user if they want to...
  - https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
  - https://www.includehelp.com/c/infix-to-postfix-conversion-using-stack-with-c-program.aspx   //converting infix expression to postfix
  - https://www.codeproject.com/Articles/405361/Converting-Postfix-Expressions-to-Infix          //converting postfix expression to infix
+ - https://deniskyashif.com/2019/02/17/implementing-a-regular-expression-engine/
  
