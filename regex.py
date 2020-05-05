@@ -1,6 +1,49 @@
 # Jina Kim - G00353420
 # Project for Grapy Theory Module in Year 3
 
+# import the necessary packages
+import argparse
+import sys
+
+
+# Define the program description
+text = 'Program in Python _to execute regular expressions on strings using an algorithm known as Thompson’s construction.'
+
+
+# Initiate the parser
+parser = argparse.ArgumentParser(description=text) # display description of this program
+parser.add_argument("-V", "--version", help="show program version", action="store_true") # display program version
+
+
+# Read arguments from the command line
+#parser.parse_args()
+args = parser.parse_args()
+
+# Check for --version or -V
+if args.version:
+    print("This is my program version 0.1")
+
+group1 = parser.add_argument_group('Regular Expression', 'The special characters are:')
+group1.add_argument('ab.', help='a followed by b')
+group1.add_argument('a*',help='any number of a"s') 
+group1.add_argument('a|b',help='an a or a b')
+group1.add_argument('+',help='Causes the resulting RE to match 1 or more repetitions of the preceding RE. ab+ will match ‘a’ followed by any non-zero number of ‘b’s; it will not match just ‘a’.')
+group1.add_argument('?',help='Causes the resulting RE to match 0 or 1 repetitions of the preceding RE. ab? will match either ‘a’ or ‘ab’.')
+
+group2 = parser.add_argument_group('group2', 'group2 description')
+group2.add_argument('--bar', help='bar help')
+
+parser.print_help()
+
+# construct the argument parse and parse the arguments
+#ap = argparse.ArgumentParser()
+#ap.add_argument("-n", "--name", required=True,
+#	help="name of the user")
+#args = vars(ap.parse_args())
+# display a friendly message to the user
+#print("Hi there {}, it's nice to meet you!".format(args["name"]))
+
+
 class State:
     """A state with one or two edges, all edges labeled by label."""
     
