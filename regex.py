@@ -7,13 +7,18 @@ import sys
 
 
 # Define the program description
-text = 'Program in Python _to execute regular expressions on strings using an algorithm known as Thompson’s construction.'
+text = 'Program in Python _to execute regular expressions on strings using an algorithm known as Thompson’s construction. Thompsons" construction is used to convert a regular expression to a NFA. This NFA is then used to match a String against the original regular expression. The main goal of this project is to accept a regular expression with the special characters to match it against an input string from the user. '
+
+guide = 'When running the program, you get a list of menu options. To select a menu option, enter the corresponding number for the user preference.'
 
 
 # Initiate the parser
-parser = argparse.ArgumentParser(description=text) # display description of this program
+#parser = argparse.ArgumentParser(description=text) # display description of this program
+parser = argparse.ArgumentParser()
 parser.add_argument("-V", "--version", help="show program version", action="store_true") # display program version
-
+parser.add_argument("-D", "--description", help="show program description", action="store_true")
+parser.add_argument("-T", "--howtorun", help="show how to run this prgram", action="store_true")
+parser.add_argument("-R", "--regex" , help="explain what the regular expression is", action="store_true")
 
 # Read arguments from the command line
 #parser.parse_args()
@@ -23,12 +28,31 @@ args = parser.parse_args()
 if args.version:
     print("This is my program version 0.1")
 
+# Check for --description or -D
+if args.description:
+    print(text)
+
+# Check for --howtorun or -T
+if args.howtorun:
+    print(guide)
+    print("option 1. This allows the user enter infix regular expression and this program will output post regular expression")
+    print("option 2. This allows the user enter infix and postfix regular expression and this program check if they are matched or not.")
+    print("option 3. This allows the user enter postfix regular expression and this program will output infix regular expression")
+    print("option 4. This allows the user to see examples of output")
+    print("option 0. This allows the user to exit the program")
+
+# Check for --regex or -R   
+if args.regex:
+    print("A regular expression is a special sequence of characters that helps you match or find other strings or sets of strings, using a specialized syntax held in a pattern. Regular expressions are widely used in UNIX world. The Python module re provides full support for Perl-like regular expressions in Python.")
+
+#This displays the regular expression special charaters for the user before using the program.
 group1 = parser.add_argument_group('Regular Expression', 'The special characters are:')
 group1.add_argument('ab.', help='a followed by b')
 group1.add_argument('a*',help='any number of a"s') 
 group1.add_argument('a|b',help='an a or a b')
 group1.add_argument('+',help='Causes the resulting RE to match 1 or more repetitions of the preceding RE. ab+ will match ‘a’ followed by any non-zero number of ‘b’s; it will not match just ‘a’.')
 group1.add_argument('?',help='Causes the resulting RE to match 0 or 1 repetitions of the preceding RE. ab? will match either ‘a’ or ‘ab’.')
+
 
 group2 = parser.add_argument_group('group2', 'group2 description')
 group2.add_argument('--bar', help='bar help')

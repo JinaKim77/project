@@ -113,11 +113,16 @@ A finite automaton is a collection of 5-tuple (Q, ∑, δ, q0, F), where:**
 #### Researches, watching youtube videos definitely helped me a lot to understand better.
 
 # References
- - https://www.w3schools.com/python/python_regex.asp
- - https://realpython.com/    
+ - https://www.w3schools.com/python/python_regex.asp (To learn about regular expression)
+ - https://realpython.com/   (To learn about python) 
  - https://www.geeksforgeeks.org/infix-to-postfix-using-different-precedence-values-for-in-stack-and-out-stack/?ref=rp
  - https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
  - https://www.includehelp.com/c/infix-to-postfix-conversion-using-stack-with-c-program.aspx   //converting infix expression to postfix
  - https://www.codeproject.com/Articles/405361/Converting-Postfix-Expressions-to-Infix          //converting postfix expression to infix
  - https://deniskyashif.com/2019/02/17/implementing-a-regular-expression-engine/
+ - https://docs.python.org/3/library/sys.html (System-specific parameters and functions)
+ - https://docs.python.org/3/library/getopt.html  (C-style parser for command line options)
+ - https://docs.python.org/3/library/argparse.html  (Parser for command-line options, arguments and sub-commands)
+ - https://docs.python.org/3/howto/argparse.html  (Argparse Tutorial)
+ - https://stackabuse.com/command-line-arguments-in-python/  (Command Line Arguments)
  
