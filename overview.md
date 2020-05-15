@@ -51,21 +51,21 @@ This program  accept command line arguments.
 ## Infix to postfix algorithm
 The regex is read in infix notations that needs to be converted to postfix notation.
 #
-while there are more symbols to be read
-  if
-    operand  -> output it.
-      ')'    -> push it on the stack
-      '('    -> pop operatiors from the stack to the output until a ')' is popped.
-                you should make sure you do not output either of the parentheses.
-    operator -> pop highter or equal precedence operators from the stack to the output.
-                stop before popping a lower precedence operator or a ')'.
-                push the operator on the stack.
-   end if
- end while
- pop the remaining operators from the stack to the output
+##### while there are more symbols to be read
+  ##### if
+#####    operand  -> output it.
+#####      ')'    -> push it on the stack
+#####      '('    -> pop operatiors from the stack to the output until a ')' is popped.
+#####                you should make sure you do not output either of the parentheses.
+#####    operator -> pop highter or equal precedence operators from the stack to the output.
+#####                stop before popping a lower precedence operator or a ')'.
+#####                push the operator on the stack.
+#####   end if
+##### end while
+##### pop the remaining operators from the stack to the output
 
-
-
+#
+#
 ## References
 #### ⬤ https://www.w3schools.com/python/python_regex.asp (To learn about regular expression)
 #### ⬤ https://realpython.com/ (To learn about python)
