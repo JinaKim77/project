@@ -2,19 +2,25 @@
 
 ## Introduction
 Program in Python _to execute regular expressions on strings using an algorithm known as Thompson’s construction. Thompsons' construction is used to convert a regular expression to a NFA. This NFA is then used to match a String against the original regular expression. The main goal of this project is to accept a regular expression with the special characters to match it against an input string from the user.
-
+# 
 ## Setup
 Developed and tested in python
 https://github.com/JinaKim77/project.git
-
+# 
 ## how to install Python
 Check this link.
 https://realpython.com/installing-python/
 1.	Open a browser window and navigate to the Download page for Windows at python.org.
 2.	Underneath the heading at the top that says Python Releases for Windows, click on the link for the Latest Python 3 Release - Python 3.x.x. (As of this writing, the latest is Python 3.6.5.)
 3.	Scroll to the bottom and select either Windows x86-64 executable installer for 64-bit or Windows x86 executable installer for 32-bit. 
-
-
+# 
+## How to run 
+#### ⬤ First, clone the repository using the following command git clone https://github.com/JinaKim77/project.git
+## 
+#### ⬤ Traverse using the command line to the folder you have cloned using the cd command.
+## 
+#### ⬤ From the command line run the following command to run the programs. python3 project.py
+# 
 ## Test
 This program  accept command line arguments.
 
@@ -33,7 +39,7 @@ This program  accept command line arguments.
 ### --regex or -R : explain what the regular expression is
 <img src="images/regex.PNG" width="1000" >
 
-## How to run 
+## User guide
 1. Firstly, when running the program, the user get a list of menu options.
    To select a menu option, enter the corresponding number for the user preference.
    As the main purpose of the program (project) is to match text string to infix regular expression,
@@ -47,7 +53,7 @@ This program  accept command line arguments.
    
  2. Then the program will ask the user to enter string that they want to check.
  3. The program will output a True or False as to whether the string was matched against the             expression.
-
+# 
 ## Infix to postfix algorithm
 The regex is read in infix notations that needs to be converted to postfix notation.
 #
