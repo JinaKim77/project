@@ -81,6 +81,7 @@ class State:
         # Label for the arrows. None means 'esilon.
         self.label = label
 
+# NFA
 class Fragment:
     """An NFA fragment with a start state and an accept state."""
     
@@ -218,23 +219,25 @@ def compile(infix):
 
             # Create new start and accept states
             accept = State()
-            start = State(edges=[frag.start, accept])
+            # Join the new start state to NFA's start state
+            start = State(edges=[frag.start])
 
             # Point the arrows
-            frag.accept.edges = [frag.start]
+            frag.accept.edges = [frag.start, accept]
 
         # zero or one of a charactori
         elif c=='?':
             # Pop a single fragment off the stack
-            frag = nfa_stack.pop()
+            frag= nfa_stack.pop()
 
             # Create new start and accept states
             accept = State()
             start = State(edges=[frag.start, accept])
 
             # Point the arrows
-            frag.accept.edges = [frag.start, accept]
-            
+            frag.accept.edges = [accept]
+        
+        #------------------not sure
         elif c=='%':
             # Pop a single fragment off the stack
             frag = nfa_stack.pop()
@@ -246,6 +249,7 @@ def compile(infix):
              # Point the arrows
             frag.accept.edges = [frag.start, accept]
             
+        #-------------------not sure
         elif c=='/':
             # Pop a single fragment off the stack
             frag = nfa_stack.pop()
@@ -256,7 +260,8 @@ def compile(infix):
             
             # Point the arrows
             frag.accept.edges = [frag.start, accept]
-            
+        
+        #--------------------not sure
         elif c=='^':
             # Pop a single fragment off the stack
             frag = nfa_stack.pop()
@@ -396,7 +401,8 @@ if __name__ == "__main__":
     
 #Give option to the user
 print("\n*****************Welcome*****************")
-var = input("Press 1- to convert infix to postfix \nPress 2- to test your infix and postfix \nPress 3- to convert postfix to infix \nPress 4- to see examples\nPress 0- to exit\n ")
+print("Please choose from one of the following options: ")
+var = input("Press 1- to convert infix to postfix \nPress 2- to check matches between your infix and postfix \nPress 3- to convert postfix to infix \nPress 4- to see examples\nPress 0- to exit\n ")
 print("*****************************************")
 num = int(var)
 
@@ -415,12 +421,12 @@ while(num != 0):
 
     # Compare user inputs(infix and postfix)
     elif num==2:
-        print("Support characters : . , | , * ")
+        print("Support characters : . , | , * , ? , + ")
         #Take infix regular expression from the user
-        regexes=input("\nEnter Infix expression :  ")
+        regexes=input("\nEnter Infix expression that you want to string to be checked:  ")
 
         #Take the string that the user wants to match
-        stringToMatch=input("Enter the string that you want to match : ")
+        stringToMatch=input("Enter the string that you want to match a regular expression : ")
 
         #To print the result as True or False
         print("\n****Result****\n")
@@ -449,7 +455,7 @@ while(num != 0):
 
 
     else:
-        print("\nNot a valid choice, try that again!")
+        print("\nNot a valid input, Please try again!")
 
     var = input("\nIf you want to continue, press 1 or 2 or 3 or 4, if not, press 0 to exit  :\n ")
     num = int(var)
