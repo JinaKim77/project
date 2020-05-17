@@ -11,8 +11,7 @@ text = 'Program in Python _to execute regular expressions on strings using an al
 
 guide = 'When running the program, you get a list of menu options. To select a menu option, enter the corresponding number for the user preference.'
 
-
-# Initiate the parser
+#Initiate the parser
 #parser = argparse.ArgumentParser(description=text) # display description of this program
 parser = argparse.ArgumentParser()
 parser.add_argument("-V", "--version", help="show program version", action="store_true") # display program version
@@ -20,7 +19,7 @@ parser.add_argument("-D", "--description", help="show program description", acti
 parser.add_argument("-T", "--howtorun", help="show how to run this prgram", action="store_true")
 parser.add_argument("-R", "--regex" , help="explain what the regular expression is", action="store_true")
 
-# Read arguments from the command line
+#Read arguments from the command line
 #parser.parse_args()
 args = parser.parse_args()
 
@@ -53,17 +52,7 @@ group1.add_argument('a|b',help='an a or a b')
 group1.add_argument('+',help='Causes the resulting RE to match 1 or more repetitions of the preceding RE. a+ will match either a or aaaa...')
 group1.add_argument('?',help='Causes the resulting RE to match 0 or 1 repetitions of the preceding RE. b? will match either empty string or b')
 
-
-parser.print_help()
-
-# construct the argument parse and parse the arguments
-#ap = argparse.ArgumentParser()
-#ap.add_argument("-n", "--name", required=True,
-#	help="name of the user")
-#args = vars(ap.parse_args())
-# display a friendly message to the user
-#print("Hi there {}, it's nice to meet you!".format(args["name"]))
-
+parser.print_help() 
 
 class State:
     """A state with one or two edges, all edges labeled by label."""
@@ -336,8 +325,6 @@ def getInfix(exp) :
     # stack now which is the required
     # infix.
     return s[0]
-
-
 
 print("This is from",__name__)
 
