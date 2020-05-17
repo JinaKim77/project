@@ -40,6 +40,7 @@ This program  accept command line arguments.
 <img src="images/regex.PNG" width="1000" >
 
 ## User guide
+<img src="images/main2.PNG" width="800" >
 1. Firstly, when running the program, the user get a list of menu options.
    To select a menu option, enter the corresponding number for the user preference.
    As the main purpose of the program (project) is to match text string to infix regular expression,
@@ -52,6 +53,7 @@ This program  accept command line arguments.
    #### ⬤ + : one or more
    
  2. Then the program will ask the user to enter string that they want to check.
+<img src="images/main3.PNG" width="800" >
  3. The program will output a True or False as to whether the string was matched against the             expression.
 # 
 ## Infix to postfix algorithm

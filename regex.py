@@ -47,15 +47,12 @@ if args.regex:
 
 #This displays the regular expression special charaters for the user before using the program.
 group1 = parser.add_argument_group('Regular Expression', 'The special characters are:')
-group1.add_argument('ab.', help='a followed by b')
-group1.add_argument('a*',help='any number of a"s') 
+group1.add_argument('a.b', help='a followed by b')
+group1.add_argument('a*',help='any number of a"s, zero or more, a* will match either empty string or a....') 
 group1.add_argument('a|b',help='an a or a b')
-group1.add_argument('+',help='Causes the resulting RE to match 1 or more repetitions of the preceding RE. ab+ will match ‘a’ followed by any non-zero number of ‘b’s; it will not match just ‘a’.')
-group1.add_argument('?',help='Causes the resulting RE to match 0 or 1 repetitions of the preceding RE. ab? will match either ‘a’ or ‘ab’.')
+group1.add_argument('+',help='Causes the resulting RE to match 1 or more repetitions of the preceding RE. a+ will match either a or aaaa...')
+group1.add_argument('?',help='Causes the resulting RE to match 0 or 1 repetitions of the preceding RE. b? will match either empty string or b')
 
-
-group2 = parser.add_argument_group('group2', 'group2 description')
-group2.add_argument('--bar', help='bar help')
 
 parser.print_help()
 
@@ -236,43 +233,8 @@ def compile(infix):
 
             # Point the arrows
             frag.accept.edges = [accept]
+            
         
-        #------------------not sure
-        elif c=='%':
-            # Pop a single fragment off the stack
-            frag = nfa_stack.pop()
-
-            # Create new start and accept states
-            accept = State()
-            start = State(edges=[frag.start, accept])
-            
-             # Point the arrows
-            frag.accept.edges = [frag.start, accept]
-            
-        #-------------------not sure
-        elif c=='/':
-            # Pop a single fragment off the stack
-            frag = nfa_stack.pop()
-
-            # Create new start and accept states
-            accept = State()
-            start = State(edges=[frag.start, accept])
-            
-            # Point the arrows
-            frag.accept.edges = [frag.start, accept]
-        
-        #--------------------not sure
-        elif c=='^':
-            # Pop a single fragment off the stack
-            frag = nfa_stack.pop()
-
-            # Create new start and accept states
-            accept = State()
-            start = State(edges=[frag.start, accept])
-            
-            # Point the arrows
-            frag.accept.edges = [frag.start, accept]
-            
 
         else:
             accept = State()
@@ -391,8 +353,20 @@ if __name__ == "__main__":
         ["b**","b",True],
         ["b*","",True],
         ["a.b.b.c","abbc",True],
-        ["a.b.b.c","abc",False]
-
+        ["a.b.b.c","abc",False],
+        ["(a.b*)","abbb",True],
+        ["(11)*","",True],
+        ["(11)*","1111",True],
+        ["(a+b)*","bbbb",True],
+        ["(a+b)*","",True],
+        ["a|b*","a",True],
+        ["a|b*","aa",False],
+        ["(a|b)*","aa",True],
+        ["a?","a",True],
+        ["a?","aa",False],
+        ["b+","",False],
+        ["b+","b",True],
+        ["b+","bbbb",True]
     ]
 
     for test in tests:
@@ -400,10 +374,10 @@ if __name__ == "__main__":
     
     
 #Give option to the user
-print("\n*****************Welcome*****************")
+print("\n******************************Welcome*******************************")
 print("Please choose from one of the following options: ")
 var = input("Press 1- to convert infix to postfix \nPress 2- to check matches between your infix and postfix \nPress 3- to convert postfix to infix \nPress 4- to see examples\nPress 0- to exit\n ")
-print("*****************************************")
+print("**********************************************************************")
 num = int(var)
 
 if num == 0:
@@ -441,7 +415,7 @@ while(num != 0):
 
     elif num==4:
         #Display examples
-        print("\n****Result****")
+        print("\n*******************************Result*********************************\n")
         print("\n==Infix==                 ==Postfix==                      == Result==")
         print(" a.b|b*                     bbbbbb                           ",match("a.b|b*","bbbbbb"))
         print(" a.b|b*                     bbbbbx                           ",match("a.b|b*","bbbbbx"))
@@ -452,8 +426,26 @@ while(num != 0):
         print("a.b.b.c                      abc                             ",match("a.b.b.c","abc"))
         print("(a|b).c*                     accccc                          ",match("(a|b).c*","accccc"))
         print("(a|b)*                       abababa                         ",match("(a|b)*","abababa"))
-
-
+        print("(a.b*)                       a                               ",match("(a.b*)","a"))
+        print("(a.b*)                       abbb                            ",match("(a.b*)","abbb"))
+        print("(a.b*)                       ba                              ",match("(a.b*)","ba"))
+        print("(11)*                        1111                            ",match("(11)*","1111"))
+        print("(11)*                                                        ",match("(aa)*",""))
+        print("(a+b)*                       bbbb                            ",match("(a+b)*","bbbb"))
+        print("(a+b)*                                                       ",match("(a+b)*",""))
+        print("a|b*                         a                               ",match("a|b*","a"))
+        print("a|b*                         b                               ",match("a|b*","b"))
+        print("a|b*                         bbbb                            ",match("a|b*","bbbb"))
+        print("a|b*                                                         ",match("a|b*",""))
+        print("a|b*                         aa                              ",match("a|b*","aa"))
+        print("(a|b)*                       aa                              ",match("(a|b)*","aa"))
+        print("a?                                                           ",match("a?",""))
+        print("a?                           a                               ",match("a?","a"))
+        print("a?                           aa                              ",match("a?","aa"))
+        print("b+                                                           ",match("b+",""))
+        print("b+                           b                               ",match("b+","b"))
+        print("b+                           bbbb                            ",match("b+","bbbb"))
+        print("\n\n*********************************************************************\n") 
     else:
         print("\nNot a valid input, Please try again!")
 

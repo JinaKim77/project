@@ -47,16 +47,15 @@ A finite automaton is a collection of 5-tuple (Q, ∑, δ, q0, F), where:**
 #####
 ## ======The special characters are:======
 ## 1) . 
-##### (Dot.) In the default mode, this matches any character except a newline. If the DOTALL flag has been specified, this matches any character including a newline.
+##### (Dot.) Concatenation operator. ( e.g. a.b : a followed by b ),this matches any character except a newline. If the DOTALL flag has been specified, this matches any character including a newline.
 ## 2) * 
-##### Causes the resulting RE to match 0 or more repetitions of the preceding RE, as many repetitions as are possible. ab* will match ‘a’, ‘ab’, or ‘a’ followed by any number of ‘b’s.
+##### The asterisk indicates zero or more occurrences of the preceding element.( e.g. a Kleene star : any number of a's, including zero ), Causes the resulting RE to match 0 or more repetitions of the preceding RE, as many repetitions as are possible.
 ## 3) | 
-##### A|B, where A and B can be arbitrary REs, creates a regular expression that will match either A or B. An arbitrary number of REs can be separated by the '|' in this way. This can be used inside groups (see below) as well. As the target string is scanned, REs separated by '|' are tried from left to right. When one pattern completely matches, that branch is accepted. This means that once A matches, B will not be tested further, even if it would produce a longer overall match. In other words, the '|' operator is never greedy. To match a literal '|', use \|, or enclose it inside a character class, as in [|].
+#####  Or operator. ( e.g. a|b : an a or a b),  A|B, where A and B can be arbitrary REs, creates a regular expression that will match either A or B. As the target string is scanned, REs separated by '|' are tried from left to right. When one pattern completely matches, that branch is accepted. This means that once A matches, B will not be tested further, even if it would produce a longer overall match. In other words, the '|' operator is never greedy.
 ## 4) +
-##### Causes the resulting RE to match 1 or more repetitions of the preceding RE. ab+ will match ‘a’ followed by any non-zero number of ‘b’s; it will not match just ‘a’.
+##### The plus sign indicates one or more occurrences of the preceding element. Causes the resulting RE to match 1 or more repetitions of the preceding RE.
 ## 5) ?
-##### Causes the resulting RE to match 0 or 1 repetitions of the preceding RE. ab? will match either ‘a’ or ‘ab’.
-#
+##### The question mark indicates zero or one occurrences of the preceding element. Causes the resulting RE to match 0 or 1 repetitions of the preceding RE.
 ## Thompsons' Construction
 #### 
 #### In computer science, Thompson's construction algorithm, also called the McNaughton-Yamada-Thompson algorithm, is a method of transforming a regular expression into an equivalent nondeterministic finite automaton (NFA). This NFA can be used to match strings against the regular expression. This algorithm is credited to Ken Thompson.
@@ -104,7 +103,7 @@ A finite automaton is a collection of 5-tuple (Q, ∑, δ, q0, F), where:**
 
  ### option 4. This allows the user to see examples of output
 <p>
-<img src="images/option4.PNG" width="700" >       
+<img src="images/four.PNG" width="700" >       
 </p>
  
 ### How I got this project done.
