@@ -61,21 +61,56 @@ The regex is read in infix notations that needs to be converted to postfix notat
 
 #### while there are more symbols to be read
 #### if
-#### ---operand  -> output it.
-#### -----')'    -> push it on the stack
-#### -----'('    -> pop operatiors from the stack to the output until a ')' is popped.
-#### ---------------you should make sure you do not output either of the parentheses.
-#### ---operator -> pop highter or equal precedence operators from the stack to the output.
-#### ---------------stop before popping a lower precedence operator or a ')'.
-#### ---------------push the operator on the stack.
-#### --end if
+#### -  operand  -> output it.
+#### -    ')'    -> push it on the stack
+#### -    '('    -> pop operatiors from the stack to the output until a ')' is popped.
+#### -              you should make sure you do not output either of the parentheses.
+#### -  operator -> pop highter or equal precedence operators from the stack to the output.
+#### -              stop before popping a lower precedence operator or a ')'.
+#### -              push the operator on the stack.
+#### end if
 #### end while
 #### pop the remaining operators from the stack to the output
 
 #
+
+## The Shunting Yard Algorithm
+#### "Shunting Yard" algorithm to convert an infix expression into a postfix expression. 
+#### It uses a stack; but in this case, the stack is used to hold operators rather than numbers.
+#### The purpose of the stack is to reverse the order of the operators in the expression. 
+#### It also serves as a storage structure, since no operator can be printed until both of its operands have appeared.
+#### In this algorithm, all operands are printed (or sent to output) when they are read. 
+
 #
+
+## Rules
+#### 1. If the incoming symbols is an operand, print it..
+
+#### 2. If the incoming symbol is a left parenthesis, push it on the stack.
+
+#### 3. If the incoming symbol is a right parenthesis: discard the right parenthesis, pop and print the stack symbols until you see a left parenthesis. 
+#### Pop the left parenthesis and discard it.
+
+#### 4. If the incoming symbol is an operator and the stack is empty or contains a left parenthesis on top, push the incoming operator onto the stack.
+
+#### 5. If the incoming symbol is an operator and has either higher precedence than the operator on the top of the stack, 
+#### or has the same precedence as the operator on the top of the stack and is right associative -- push it on the stack.
+
+#### 6. If the incoming symbol is an operator and has either lower precedence than the operator on the top of the stack, or has the same precedence as the operator on the top of the stack and is left associative -- continue to pop the stack until this is not true. Then, push the incoming operator.
+
+#### 7. At the end of the expression, pop and print all operators on the stack. (No parentheses should remain.)
+
+# 
+## Thompson's construction - Converting a regular expression to a NFA 
+#### Thompson's construction algorithm, also called the McNaughton-Yamada-Thompson algorithm, is a method of transforming a regular expression into an equivalent nondeterministic finite automaton (NFA).This NFA can be used to match strings against the regular expression.
+#### The algorithm works recursively by splitting an expression into its constituent subexpressions, from which the NFA will be constructed using a set of rules. More precisely, from a regular expression E, the obtained automaton A with the transition function δ respects the following properties:
+#####  A has exactly one initial state q0, which is not accessible from any other state. 
+##### A has exactly one final state qf, which is not co-accessible from any other state.
+##### The number of transitions leaving any state is at most two.
+
+# 
+ 
 ## References
-#### ⬤ https://www.w3schools.com/python/python_regex.asp (To learn about regular expression)
 #### ⬤ https://realpython.com/ (To learn about python)
 #### ⬤ https://www.geeksforgeeks.org/infix-to-postfix-using-different-precedence-values-for-in-stack-and-out-stack/?ref=rp
 #### ⬤ https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
