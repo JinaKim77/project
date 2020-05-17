@@ -55,22 +55,22 @@ This program  accept command line arguments.
  2. Then the program will ask the user to enter string that they want to check.
 <img src="images/main3.PNG" width="800" >
  3. The program will output a True or False as to whether the string was matched against the             expression.
-# 
+
 ## Infix to postfix algorithm
 The regex is read in infix notations that needs to be converted to postfix notation.
-#
-##### while there are more symbols to be read
-  ##### if
-#####    operand  -> output it.
-#####      ')'    -> push it on the stack
-#####      '('    -> pop operatiors from the stack to the output until a ')' is popped.
-#####                you should make sure you do not output either of the parentheses.
-#####    operator -> pop highter or equal precedence operators from the stack to the output.
-#####                stop before popping a lower precedence operator or a ')'.
-#####                push the operator on the stack.
-#####   end if
-##### end while
-##### pop the remaining operators from the stack to the output
+
+#### while there are more symbols to be read
+#### if
+#### ---operand  -> output it.
+#### -----')'    -> push it on the stack
+#### -----'('    -> pop operatiors from the stack to the output until a ')' is popped.
+#### ---------------you should make sure you do not output either of the parentheses.
+#### ---operator -> pop highter or equal precedence operators from the stack to the output.
+#### ---------------stop before popping a lower precedence operator or a ')'.
+#### ---------------push the operator on the stack.
+#### --end if
+#### end while
+#### pop the remaining operators from the stack to the output
 
 #
 #
